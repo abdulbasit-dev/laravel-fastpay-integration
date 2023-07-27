@@ -1,0 +1,43 @@
+{
+    "name": "basit/laravel-fastpay-integration",
+    "description": "Integrate FastPay Payment Gateway to Laravel Application",
+    "keywords": [
+        "laravel",
+        "fastpay",
+        "payment",
+        "gateway",
+        "integration",
+        "laravel-fastpay-integration",
+    ],
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "role": "Developer",
+            "name": "AbdulBasit",
+            "email": "abdulBasit99salah@gmail.com",
+            "homepage": "https://basit-dev.vercel.app/"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Basit\\FastpayPayment\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Basit\\FastpayPayment\\Tests\\": "tests/"
+        }
+    },
+    "require": {
+        "php": "^8.1",
+        "illuminate/support": "^10.16"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "config": {
+        "sort-packages": true,
+        "preferred-install": "dist",
+        "optimize-autoloader": true
+    }
+}
