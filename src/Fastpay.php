@@ -1,60 +1,127 @@
 <?php
 
-namespace Basit\FastpayIntegration;
+namespace Basit\FastpayPayment;
 
-use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Log;
-use Basit\FastpayIntegration\FastpayBaseClass;
-use Basit\FastpayIntegration\Interfaces\FastpayInterfaces;
+use Basit\FastpayPayment\FastpayBaseClass;
+use Illuminate\Support\Facades\Validator;
 
-// class Fastpay extends FastpayBaseClass implements FastpayInterfaces
 class Fastpay extends FastpayBaseClass
 {
-    public function initiate($orderId, $qty, $unitPrice, $totalPrice)
+    public static function initiate($orderId, $cart) : array
     {
-        // validate incoming parameters
-
         try {
+            // validate incoming parameters
+            $validator = Validator::make(
+                [
+                    'order_id' => $orderId,
+                    'cart' => $cart,
+                ],
+                [
+                    'order_id' => 'required',
+                    'cart' => ['required', 'array'],
+                    'cart.*.name' => ['required', 'string'],
+                    'cart.*.qty' => ['required', 'integer'],
+                    'cart.*.unit_price' => ['required', 'integer'],
+                ]
+            );
+
+            if ($validator->fails()) {
+                return response()->json([
+                    "code" => Response::HTTP_BAD_REQUEST,
+                    'message' => 'Error',
+                    'error' => $validator->errors()
+                ], Response::HTTP_BAD_REQUEST);
+            }
+
+            $billAmount = 0;
+
+            // Iterate through the cart using references to modify each item
+            foreach ($cart as &$item) {
+                // Add the sub_total property to cart items
+                $item['sub_total'] = $item['qty'] * $item['unit_price'];
+
+                // Update the billAmount by adding the sub_total for each item
+                $billAmount += $item['sub_total'];
+            }
+
+            // Encode the modified cart back to JSON
+            $cart = json_encode($cart);
+
             $response = Http::post(self::baseUrl() . '/api/v1/public/pgw/payment/initiation', [
                 "store_id" => config("fastpay.store_id"),
                 "store_password" => config("fastpay.store_password"),
                 "order_id" =>  $orderId,
-                "bill_amount" => $totalPrice,
+                "bill_amount" => $billAmount,
                 "currency" => "IQD",
-                "cart" => '[{"name":"Ticket","qty":' . $qty . ',"unit_price":' . $unitPrice . ',"sub_total":' . $totalPrice . '}]'
+                "cart" => $cart,
             ])->json();
 
-            if ($response['code'] == 200) {
-                return ($response['data']['redirect_uri']);
-            } else {
-                Log::error($response);
-            }
+            return $response;
         } catch (\Throwable $th) {
-            throw $th;
+
+            return response()->json([
+                "code" => Response::HTTP_INTERNAL_SERVER_ERROR,
+                'message' => 'Error',
+                'error' => $th->getMessage()
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
 
-    public function validate($merchantOrderId)
+    public static function validate($merchantOrderId) : array
     {
         try {
-            // call fastpay validation api
             $response = Http::post(self::baseUrl() . '/api/v1/public/pgw/payment/validate', [
                 "store_id" => config("fastpay.store_id"),
                 "store_password" => config("fastpay.store_password"),
                 "order_id" => $merchantOrderId,
             ])->json();
 
-            // if payment is success, update order status to paid
-            if ($response['code'] == 200) {
-                return  true;
-            } else {
-                Log::error($response);
-            }
-            return 1;
+            return $response;
+
         } catch (\Throwable $th) {
             throw $th;
+        }
+    }
+
+    public static function refund(string $merchantOrderId,string $msisdn, float $amount) : array
+    {
+        try {
+            $response = Http::post(self::baseUrl() . '/api/v1/public/pgw/payment/refund', [
+                "store_id"       => config("fastpay.store_id"),
+                "store_password" => config("fastpay.store_password"),
+                "order_id"       => $merchantOrderId,
+                "msisdn"         => $msisdn,
+                "amount"         => $amount,
+            ])->json();
+
+            return $response;
+        } catch (\Throwable $th) {
+            return response()->json([
+                "code" => Response::HTTP_INTERNAL_SERVER_ERROR,
+                'message' => 'Error',
+                'error' => $th->getMessage()
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    public static function refundValidate(string $merchantOrderId) : array
+    {
+        try {
+            $response = Http::post(self::baseUrl() . '/api/v1/public/pgw/payment/refund/validation', [
+                "store_id"       => config("fastpay.store_id"),
+                "store_password" => config("fastpay.store_password"),
+                "order_id"       => $merchantOrderId,
+            ])->json();
+
+            return $response;
+        } catch (\Throwable $th) {
+            return response()->json([
+                "code" => Response::HTTP_INTERNAL_SERVER_ERROR,
+                'message' => 'Error',
+                'error' => $th->getMessage()
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
 }

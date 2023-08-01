@@ -4,8 +4,8 @@ namespace Basit\FastpayPayment;
 
 class FastpayBaseClass
 {
-    protected function baseUrl() :string
+    protected static function baseUrl() :string
         {
-            return config("fastpay.environment") == "production" ? "https://staging-apigw-merchant.fast-pay.iq" : "https://apigw-merchant.fast-pay.iq";
+            return config("fastpay.environment") == "production" ? "https://apigw-merchant.fast-pay.iq": "https://staging-apigw-merchant.fast-pay.iq";
     }
 }

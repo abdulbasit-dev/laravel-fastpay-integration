@@ -2,26 +2,10 @@
 
 namespace Basit\FastpayPayment\Providers;
 
-use Spatie\LaravelPackageTools\Package;
-use Spatie\LaravelPackageTools\PackageServiceProvider;
-use VendorName\Skeleton\Commands\SkeletonCommand;
+use Illuminate\Support\ServiceProvider;
 
-class SkeletonServiceProvider extends PackageServiceProvider
+class FastpayServiceProvider extends ServiceProvider
 {
-    // public function configurePackage(Package $package): void
-    // {
-    //     /*
-    //      * This class is a Package Service Provider
-    //      *
-    //      * More info: https://github.com/spatie/laravel-package-tools
-    //      */
-    //     $package
-    //         ->name('skeleton')
-    //         ->hasConfigFile()
-    //         ->hasViews()
-    //         ->hasMigration('create_skeleton_table')
-    //         ->hasCommand(SkeletonCommand::class);
-    // }
 
     public function register(): void
     {
@@ -31,6 +15,6 @@ class SkeletonServiceProvider extends PackageServiceProvider
     {
         $this->publishes([
             __DIR__ . '/../config/fastpay.php' => config_path('fastpay.php'),
-        ], "fastpay-config");
+        ], ["fastpay"]);
     }
 }

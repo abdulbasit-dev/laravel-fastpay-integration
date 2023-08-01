@@ -4,11 +4,11 @@ namespace Basit\FastpayPayment\Interfaces;
 
 interface FastpayInterfaces
 {
-    public function initiate();
+    public static function initiate();
 
-    public function validate();
+    public static function validate();
 
-    public function refund();
+    public static function refund();
 
-    public function refundValid();
+    public static function refundValid();
 }

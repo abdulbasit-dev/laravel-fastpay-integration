@@ -11,7 +11,7 @@ return [
    |
    */
 
-    'environment' => env('FASTPAY_ENVIRONMENT', 'stage'),
+    'environment' => env('FASTPAY_ENVIRONMENT', 'staging'),
 
     /*
    |--------------------------------------------------------------------------
