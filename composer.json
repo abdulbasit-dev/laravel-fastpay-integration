@@ -7,7 +7,7 @@
         "payment",
         "gateway",
         "integration",
-        "laravel-fastpay-integration",
+        "laravel-fastpay-integration"
     ],
     "type": "library",
     "license": "MIT",
