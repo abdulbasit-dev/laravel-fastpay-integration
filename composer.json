@@ -34,13 +34,13 @@
       "Basit\\FastpayPayment\\Tests\\": "tests/"
     }
   },
-    "extra": {
-      "laravel": {
-        "providers": [
-          "Basit\\FastpayPayment\\Providers\\FastpayServiceProvider"
-        ]
-      }
-    },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Basit\\FastpayPayment\\Providers\\FastpayServiceProvider"
+      ]
+    }
+  },
   "minimum-stability": "dev",
   "prefer-stable": true,
   "config": {

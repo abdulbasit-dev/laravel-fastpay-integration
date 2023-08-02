@@ -179,7 +179,14 @@ $response = Fastpay::refundValidate($merchantOrderId);
 
 ## Contributing
 
-Please
+Feel free to contribute to this project
+
+## Found an Issue or Bug?
+
+If you encounter any issues, bugs, or have questions about this package, we encourage you to report them on our [GitHub Issues](https://github.com/abdulbasit-dev/laravel-fastpay-integration/issues) page. Please check if the issue has already been reported before creating a new one. When reporting an issue, provide as much detail as possible, including the steps to reproduce it, the expected behavior, and the actual behavior.
+
+We value your feedback, and we'll do our best to address and resolve the issues in a timely manner. Your contributions are essential to improving this package for everyone.
+
 
 ## Credits
 
