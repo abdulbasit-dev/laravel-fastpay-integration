@@ -111,7 +111,7 @@ $response = Fastpay::validate($merchantOrderId);
     "order_id": "516867551564444475",
     "customer_account_no": "+964xxxxxxxxxx",
     "status": "Success",
-    "received_at": "2023-06-14 18:06:30",
+    "received_at": "2023-06-14 18:06:30"
   }
 }
 ```
@@ -136,7 +136,20 @@ $response = Fastpay::refund($merchantOrderId, $msisdn, $amount);
 #### Success Response
 
 ```json
-
+{
+  "code": 200,
+  "messages": [],
+  "data": {
+    "summary": {
+      "recipient": {
+        "name": "John Doe",
+        "mobile_number": "+9640101010101",
+        "avatar": "https://revamp.fast-pay.cash/image/revamp.jpg",
+      }
+      "refund_invoice_id": "AUJHMA1634"
+    }
+  }
+}
 ```
 
 ### 4. Validate Refund
@@ -153,16 +166,20 @@ $response = Fastpay::refundValidate($merchantOrderId);
 #### Success Response
 
 ```json
-
+{
+  "code": 200,
+  "messages": [],
+  "data": {
+    "order_id": "LAREVEORD5006",
+    "refund_status": true,
+    "status_checked_at": "2021-03-01 00:00:05"
+  }
+}
 ```
-
-## Changelog
-
-Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
 
 ## Contributing
 
-Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
+Please
 
 ## Credits
 
