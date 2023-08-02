@@ -5,14 +5,12 @@ namespace Basit\FastpayPayment;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Http;
 use Basit\FastpayPayment\FastpayBaseClass;
-use Illuminate\Database\Eloquent\Casts\Json;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Validator;
 
 class Fastpay extends FastpayBaseClass
 {
-    // public static function initiate($orderId, $cart) : JsonResponse
-    public static function initiate($orderId, $cart)
+    public static function initiate($orderId, $cart) : JsonResponse
     {
         try {
             // validate incoming parameters

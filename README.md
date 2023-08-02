@@ -136,24 +136,7 @@ $response = Fastpay::refund($merchantOrderId, $msisdn, $amount);
 #### Success Response
 
 ```json
-{
-  "code": 200,
-  "messages": [],
-  "data": {
-    "gw_transaction_id": "CUL1NUB713",
-    "merchant_order_id": "LAREVEORD1005",
-    "received_amount": "5000.00",
-    "currency": "IQD",
-    "customer_name": "John Doe",
-    "customer_mobile_number": "+964xxxxxxxxxx",
-    "at": "2023-06-14 18:06:30",
-    "transaction_id": "AXGOSG5527",
-    "order_id": "516867551564444475",
-    "customer_account_no": "+964xxxxxxxxxx",
-    "status": "Success",
-    "received_at": "2023-06-14 18:06:30",
-  }
-}
+
 ```
 
 ### 4. Validate Refund
@@ -170,13 +153,7 @@ $response = Fastpay::refundValidate($merchantOrderId);
 #### Success Response
 
 ```json
-{
-  "code": 200,
-  "messages": ["Payment Initiation request processed successfully."],
-  "data": {
-    "redirect_uri": "https://staging-pgw.fast-pay.iq/pay?token=fc334490-348d-4040-87d9-dc33ae5347d8"
-  }
-}
+
 ```
 
 ## Changelog
@@ -194,7 +171,3 @@ Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
 ## License
 
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
-
-```
-
-```
