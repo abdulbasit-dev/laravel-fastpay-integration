@@ -25,6 +25,8 @@ FASTPAY_STORE_ID=""
 FASTPAY_STORE_PASSWORD=""
 ```
 
+**Note:** Ensure to set the `FASTPAY_ENVIRONMENT` variable in your `.env` file to either "staging" or "production" based on your requirements.
+
 ## Usage
 
 ### 1. Initiate Payment
@@ -144,7 +146,7 @@ $response = Fastpay::refund($merchantOrderId, $msisdn, $amount);
       "recipient": {
         "name": "John Doe",
         "mobile_number": "+9640101010101",
-        "avatar": "https://revamp.fast-pay.cash/image/revamp.jpg",
+        "avatar": "https://revamp.fast-pay.iq/image/revamp.jpg",
       }
       "refund_invoice_id": "AUJHMA1634"
     }
