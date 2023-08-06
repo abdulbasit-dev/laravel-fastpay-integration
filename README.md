@@ -3,7 +3,16 @@
 This package provides integration with Fastpay, allowing you to initiate payments, validate payments, process refunds, and validate refunds
 in your Laravel application.
 
-## Installation
+## Translations
+
+We have provided translations of this README in different languages:
+
+- [Kurdish (Ku)](README.ku.md)
+- [Arabic (Ar)](README.ar.md)
+
+Please note that these translations were done using Google Translate and may not be 100% accurate. If you find any inaccuracies or have suggestions for improvement, feel free to let us know. Your feedback is valuable to us!
+
+## Installation 
 
 You can install the package via composer:
 
@@ -67,9 +76,9 @@ $response = Fastpay::initiate($orderId, $cart);
 
 ## Payment Notification Validation (IPN URL)
 
-Fastpay sends a POST request to your IPN URL with payment information before redirecting the user back to your website. This IPN
-notification is essential for validating the transaction and preventing fraudulent payments. Your IPN URL should be set up to handle these
-payment notifications and perform validation based on the received data.
+Fastpay sends a POST request to your IPN URL with payment information before redirecting the user back to your website. 
+This IPN notification is essential for validating the transaction and preventing fraudulent payments.
+Your IPN URL should be set up to handle these payment notifications and perform validation based on the received data.
 
 When Fastpay sends an IPN notification to your IPN URL, the POST request will include the following data:
 
@@ -179,6 +188,10 @@ $response = Fastpay::refundValidate($merchantOrderId);
 }
 ```
 
+# Changelog
+
+Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
+
 ## Contributing
 
 Feel free to contribute to this project
@@ -188,7 +201,6 @@ Feel free to contribute to this project
 If you encounter any issues, bugs, or have questions about this package, we encourage you to report them on our [GitHub Issues](https://github.com/abdulbasit-dev/laravel-fastpay-integration/issues) page. Please check if the issue has already been reported before creating a new one. When reporting an issue, provide as much detail as possible, including the steps to reproduce it, the expected behavior, and the actual behavior.
 
 We value your feedback, and we'll do our best to address and resolve the issues in a timely manner. Your contributions are essential to improving this package for everyone.
-
 
 ## Credits
 
